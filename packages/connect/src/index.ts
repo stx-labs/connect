@@ -57,6 +57,22 @@ export { getStacksProvider, isStacksWalletInstalled } from './utils';
  *
  * Exports `WalletConnect.Networks` and `WalletConnect.Chains` for easy network configuration.
  * Exports `WalletConnect.Default` for the default configuration.
+ * Exports `WalletConnect.initializeProvider` for initializing WalletConnect independently.
+ *
+ * @example
+ * ```typescript
+ * import { WalletConnect } from '@stacks/connect';
+ *
+ * // Initialize WalletConnect before making requests
+ * await WalletConnect.initializeProvider('your-project-id');
+ *
+ * // Or with full config
+ * await WalletConnect.initializeProvider({
+ *   projectId: 'your-project-id',
+ *   metadata: { ... },
+ *   networks: [WalletConnect.Networks.Stacks]
+ * });
+ * ```
  *
  * @example
  * ```typescript
@@ -86,7 +102,7 @@ export { getStacksProvider, isStacksWalletInstalled } from './utils';
  * }, 'method', params);
  * ```
  */
-export * as WalletConnect from './walletconnect/config';
+export * as WalletConnect from './walletconnect/index';
 
 // TODO: (next)
 // We won't expose these types (TypeBox and Zod) until they are final and stable.
