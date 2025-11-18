@@ -64,4 +64,4 @@ Provide context on how tests should be performed.
 - [ ] Code is commented where needed
 - [ ] Unit test coverage for new or modified code paths
 - [ ] Changelog is updated
-- [ ] Tag @janniks for review
+- [ ] Tag @jannik-stacks for review
