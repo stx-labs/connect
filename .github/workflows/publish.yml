@@ -2,8 +2,12 @@ name: Publish
 on:
   push:
     branches:
-      - 'main'
+      - "main"
   workflow_dispatch:
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   publish_npm:
@@ -11,20 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'chore: version packages')"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Prepare repository
-        run: git checkout main
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Install monorepo deps
-        run: npm ci
-      - name: Setup .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Publish
-        run: npx lerna publish from-package --yes
+          node-version: "24"
+          cache: "npm"
+      - run: npm ci
+      - run: npx lerna publish from-package --yes
