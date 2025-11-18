@@ -2,12 +2,8 @@ name: Version
 on:
   push:
     branches:
-      - 'main'
+      - "main"
   workflow_dispatch:
-
-env:
-  COMMIT_USER: Hiro DevOps
-  COMMIT_EMAIL: 45208873+blockstack-devops@users.noreply.github.com
 
 jobs:
   code_checks:
@@ -15,34 +11,28 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'chore: version packages')"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Code Checks
-        uses: ./.github/actions/code-checks
+          node-version: "24"
+          cache: "npm"
+      - uses: ./.github/actions/code-checks
 
   version:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'chore: version packages')"
     needs: [code_checks]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      - name: Create Release Pull Request
-        uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba
+          node-version: "24"
+          cache: "npm"
+      - run: npm ci
+      - uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba
         with:
-          title: 'chore: version packages'
-          commit: 'chore: version packages'
+          title: "chore: version packages"
+          commit: "chore: version packages"
+          commitMode: "github-api"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "hirosystems/connect"
+      "repo": "stx-labs/connect"
     }
   ],
   "commit": false,
