@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="/.github/img/banner.svg" alt="Stacks Connect">
-</div>
+# Stacks Connect
 
 ## ⚡️ Building a Stacks-enabled web app?
 
