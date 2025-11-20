@@ -1,5 +1,12 @@
 # Change Log
 
+## 23.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`7f3063a`](https://github.com/stx-labs/connect/commit/7f3063a45f833977246aef9b6193d42b17ec33f7)]:
+  - @stacks/connect@8.2.3
+
 ## 23.1.2
 
 ### Patch Changes

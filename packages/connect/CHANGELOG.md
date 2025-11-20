@@ -1,5 +1,11 @@
 # Change Log
 
+## 8.2.3
+
+### Patch Changes
+
+- [#477](https://github.com/stx-labs/connect/pull/477) [`7f3063a`](https://github.com/stx-labs/connect/commit/7f3063a45f833977246aef9b6193d42b17ec33f7) Thanks [@jannik-stacks](https://github.com/jannik-stacks)! - Fix a crash when used wallet providers don't properly support WalletConnect.
+
 ## 8.2.2
 
 ### Patch Changes
