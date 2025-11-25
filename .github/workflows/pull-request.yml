@@ -22,4 +22,7 @@ jobs:
       - uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # 6.2.1
 
   code-checks:
-    uses: ./.github/actions/code-checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/code-checks
