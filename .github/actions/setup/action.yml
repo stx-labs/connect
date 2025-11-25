@@ -1,0 +1,13 @@
+name: "setup"
+description: "checkout code and setup node environment"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "24"
+        cache: "npm"
+    - run: npm ci
+      shell: bash

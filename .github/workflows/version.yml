@@ -1,42 +1,38 @@
-name: Version
+name: version
+
 on:
   push:
     branches:
       - "main"
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
+# TODO: RE-ENABLE VERSION WHEN PERMISSIONS ARE FIXED
+# permissions:
+#   contents: write
+#   pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  code_checks:
-    name: Code checks
+  code-checks:
     if: "!contains(github.event.head_commit.message, 'chore: version packages')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-          cache: "npm"
+      - uses: ./.github/actions/setup
       - uses: ./.github/actions/code-checks
 
-  version:
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'chore: version packages')"
-    needs: [code_checks]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-          cache: "npm"
-      - run: npm ci
-      - uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba
-        with:
-          title: "chore: version packages"
-          commit: "chore: version packages"
-          commitMode: "github-api"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # TODO: RE-ENABLE VERSION WHEN PERMISSIONS ARE FIXED
+  # version:
+  #   runs-on: ubuntu-latest
+  #   if: "!contains(github.event.head_commit.message, 'chore: version packages')"
+  #   needs: [code-checks]
+  #   steps:
+  #     - uses: ./.github/actions/setup
+  #     - uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba
+  #       with:
+  #         title: "chore: version packages"
+  #         commit: "chore: version packages"
+  #         commitMode: "github-api"
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
