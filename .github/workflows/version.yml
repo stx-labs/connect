@@ -18,8 +18,9 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'chore: version packages')"
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/setup
-      - uses: ./.github/actions/code-checks
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/install-node
+      - uses: ./.github/actions/check-code
 
   # TODO: RE-ENABLE VERSION WHEN PERMISSIONS ARE FIXED
   # version:
@@ -27,7 +28,8 @@ jobs:
   #   if: "!contains(github.event.head_commit.message, 'chore: version packages')"
   #   needs: [code-checks]
   #   steps:
-  #     - uses: ./.github/actions/setup
+  #     - uses: actions/checkout@v4
+  #     - uses: ./.github/actions/install-node
   #     - uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba
   #       with:
   #         title: "chore: version packages"

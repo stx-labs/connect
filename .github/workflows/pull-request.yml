@@ -24,5 +24,6 @@ jobs:
   code-checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/setup
-      - uses: ./.github/actions/code-checks
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/install-node
+      - uses: ./.github/actions/check-code

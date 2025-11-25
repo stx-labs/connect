@@ -1,4 +1,4 @@
-name: "code checks"
+name: "check-code"
 description: "run linting and type checking"
 
 runs:
