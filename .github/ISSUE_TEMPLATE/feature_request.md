@@ -6,7 +6,7 @@ labels: 'enhancement'
 ---
 
 **Please review the existing enhancement issues at the link below before creating a new one to ensure you do not create a duplicate request.**
-If you see an [existing enhancement issues](https://github.com/hirosystems/connect/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement) please comment on the issue or upvote the issue with a :thumbsup:
+If you see an [existing enhancement issues](https://github.com/stx-labs/connect/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement) please comment on the issue or upvote the issue with a :thumbsup:
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. E.g., I'm always frustrated when [...]

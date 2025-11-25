@@ -1,5 +1,11 @@
 # Change Log
 
+## 8.2.3
+
+### Patch Changes
+
+- 7f3063a: Fix a crash when used wallet providers don't properly support WalletConnect.
+
 ## 8.2.2
 
 ### Patch Changes

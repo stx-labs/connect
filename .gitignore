@@ -52,3 +52,6 @@ docs/
 storybook-static/
 
 *storybook.log
+
+# changsets action can't handle executable files
+.github/.husky/commit-msg

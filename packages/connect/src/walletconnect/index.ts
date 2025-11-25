@@ -40,7 +40,7 @@ class WalletConnectProvider implements StacksProvider {
 
     if (!session?.namespaces?.stacks?.accounts) return [];
 
-    const stacksSessionAddressesString = session?.sessionProperties['stacks_getAddresses'];
+    const stacksSessionAddressesString = session?.sessionProperties?.['stacks_getAddresses'];
     const stacksSessionAddresses = JSON.parse(stacksSessionAddressesString || '[]');
     const stacksAddresses = session.namespaces.stacks.accounts.map(account => ({
       address: account.split(':')[2],
