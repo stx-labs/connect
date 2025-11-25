@@ -102,7 +102,7 @@ export { getStacksProvider, isStacksWalletInstalled } from './utils';
  * }, 'method', params);
  * ```
  */
-export * as WalletConnect from './walletconnect/index';
+export * as WalletConnect from './walletconnect';
 
 // TODO: (next)
 // We won't expose these types (TypeBox and Zod) until they are final and stable.
