@@ -160,7 +160,6 @@ class WalletConnectProvider implements StacksProvider {
         case 'stx_getAccounts':
           const addresses = await this.getAddresses();
           return jsonRpcResponse(addresses);
-
         case 'stx_signMessage':
           const caipAddress = this.connector.provider?.session?.namespaces?.stacks?.accounts[0];
           const address = caipAddress.split(':')[2];
@@ -169,7 +168,6 @@ class WalletConnectProvider implements StacksProvider {
             caipNetworkId
           )) as SignMessageResult;
           return jsonRpcResponse(result);
-
         default:
           return (await this.connector.request(
             { method, params },
@@ -215,3 +213,9 @@ export async function initializeWalletConnectProvider(
 
   window['WalletConnectProvider'] = walletConnectProvider;
 }
+
+// Re-export config constants
+export { Networks, Chains, Default } from './config';
+
+// Export with consumer-facing name
+export { initializeWalletConnectProvider as initializeProvider };
