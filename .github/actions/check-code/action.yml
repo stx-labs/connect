@@ -1,0 +1,12 @@
+name: "check-code"
+description: "run linting and type checking"
+
+runs:
+  using: "composite"
+  steps:
+    - run: npm run lint
+      shell: bash
+    - run: npm run types
+      shell: bash
+    - run: npm run typecheck
+      shell: bash
