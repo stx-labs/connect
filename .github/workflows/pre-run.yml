@@ -8,6 +8,9 @@ on:
         value: ${{ jobs.check-fork.outputs.is_not_fork }}
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check-fork:
     runs-on: ubuntu-latest
