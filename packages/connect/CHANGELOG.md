@@ -1,5 +1,13 @@
 # Change Log
 
+## 8.2.4
+
+### Patch Changes
+
+- 9cd2aa8: Fix regression where all default providers are shown as installed
+- Updated dependencies [9cd2aa8]
+  - @stacks/connect-ui@8.1.2
+
 ## 8.2.3
 
 ### Patch Changes
