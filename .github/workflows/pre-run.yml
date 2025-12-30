@@ -1,0 +1,21 @@
+name: pre-run
+
+on:
+  workflow_call:
+    outputs:
+      is-not-fork:
+        description: "is the repository the original project"
+        value: ${{ jobs.check-fork.outputs.is_not_fork }}
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-fork:
+    runs-on: ubuntu-latest
+    outputs:
+      is_not_fork: ${{ steps.check.outputs.is_not_fork }}
+    steps:
+      - id: check
+        run: echo "is_not_fork=${{ github.repository_owner == 'stx-labs' }}" >> "$GITHUB_OUTPUT"
