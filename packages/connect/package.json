@@ -1,6 +1,6 @@
 {
   "name": "@stacks/connect",
-  "version": "8.2.3",
+  "version": "8.2.4",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "@reown/appkit-universal-connector": "1.7.17",
     "@scure/base": "^1.2.4",
     "@stacks/common": "^7.0.2",
-    "@stacks/connect-ui": "8.1.1",
+    "@stacks/connect-ui": "8.1.2",
     "@stacks/network": "^7.0.2",
     "@stacks/network-v6": "npm:@stacks/network@^6.16.0",
     "@stacks/profile": "^7.0.5",

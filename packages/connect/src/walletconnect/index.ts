@@ -120,7 +120,7 @@ class WalletConnectProvider implements StacksProvider {
     params?: MethodParamsRaw<M>
   ) {
     const accountMethods = ['getAddresses', 'stx_getAccounts', 'stx_getAddresses'];
-    const network = 'network' in params ? (params.network as NetworkString) : undefined;
+    const network = params && 'network' in params ? (params.network as NetworkString) : undefined;
 
     if (network) {
       return {

@@ -1,4 +1,5 @@
-name: Publish
+name: publish
+
 on:
   push:
     branches:
@@ -8,18 +9,15 @@ on:
 permissions:
   id-token: write # Required for OIDC
   contents: write
-  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  publish_npm:
-    name: Publish production NPM packages
+  publish-npm:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'chore: version packages')"
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-          cache: "npm"
-      - run: npm ci
+      - uses: ./.github/actions/install-node
       - run: npx lerna publish from-package --yes

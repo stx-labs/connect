@@ -1,5 +1,11 @@
 # Change Log
 
+## 8.1.2
+
+### Patch Changes
+
+- 9cd2aa8: Fix regression where all default providers are shown as installed
+
 ## 8.1.1
 
 ### Patch Changes

@@ -428,7 +428,7 @@ function getMethodOverrides<M extends keyof Methods>(
   params?: MethodParams<M>,
   enableOverrides: boolean = true
 ): { method: string; params: any } {
-  if (!enableOverrides) return { method, params };
+  if (!provider || !enableOverrides) return { method, params };
 
   // Xverse-ish wallets
   if (
