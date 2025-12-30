@@ -1,0 +1,12 @@
+name: "install-node"
+description: "setup node environment and install dependencies"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "24"
+        cache: "npm"
+    - run: npm ci
+      shell: bash

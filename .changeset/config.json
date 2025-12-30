@@ -1,9 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": [
-    "@changesets/changelog-github",
+    "@changesets/changelog-git",
     {
-      "repo": "hirosystems/connect"
+      "repo": "stx-labs/connect"
     }
   ],
   "commit": false,

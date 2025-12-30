@@ -1,10 +1,8 @@
-<div align="center">
-  <img src="/.github/img/banner.svg" alt="Stacks Connect">
-</div>
+# Stacks Connect
 
 ## ⚡️ Building a Stacks-enabled web app?
 
-Head over to the [`@stacks/connect` README](https://github.com/hirosystems/connect/tree/main/packages/connect).
+Head over to the [`@stacks/connect` README](https://github.com/stx-labs/connect/tree/main/packages/connect).
 
 ---
 
@@ -91,20 +89,14 @@ However, the minimum recommended methods are:
 
 ---
 
-<div align="center"><br>
-
-[![Hiro Docs](https://img.shields.io/badge/%2F--%2F-Docs-orange?labelColor=gray)](https://docs.hiro.so/)&nbsp;&nbsp;[![Hiro Twitter](https://img.shields.io/badge/Follow%20%40hirosystems-orange?labelColor=gray&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZmlsbD0iI2ZmZiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBkPSJNNTAgMTAuNGMtMS44LjktMy44IDEuNC01LjggMS43IDItMS4zIDMuNy0zLjMgNC41LTUuNy0yIDEuMS00LjIgMi02LjYgMi41YTEwLjMgMTAuMyAwIDAgMC0xNy41IDkuM0EyOS4yIDI5LjIgMCAwIDEgMy40IDcuNWExMC4yIDEwLjIgMCAwIDAgMy4yIDEzLjdDNSAyMS4yIDMuMyAyMC43IDIgMjB2LjJjMCA1IDMuNSA5LjEgOC4yIDEwYTEwLjMgMTAuMyAwIDAgMS00LjYuMmMxLjMgNC4xIDUgNyA5LjYgNy4yQTIwLjYgMjAuNiAwIDAgMS0uMSA0MS43YTI5IDI5IDAgMCAwIDQ1LTI2YzItMS40IDMuOC0zLjIgNS4yLTUuM3oiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXNpemU9Im5vbmUiIGZvbnQtd2VpZ2h0PSJub25lIiBzdHlsZT0ibWl4LWJsZW5kLW1vZGU6bm9ybWFsIiB0ZXh0LWFuY2hvcj0ibm9uZSIgdHJhbnNmb3JtPSJzY2FsZSg1LjEpIi8+PC9zdmc+&logoColor=white)](https://twitter.com/hirosystems)&nbsp;&nbsp;[![Stacks Discord](https://img.shields.io/badge/%23stacks--js_on%20Discord-orange?labelColor=gray&logo=discord&logoColor=white)](https://stacks.chat/)
-
-</div>
-
 ## 🎁 Contribute
 
 Development of this product happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving the product.
 
 ### Code of Conduct
 
-Please read our [Code of conduct](https://github.com/hirosystems/connect/blob/main/CODE_OF_CONDUCT.md) since we expect project participants to adhere to it.
+Please read our [Code of conduct](https://github.com/stx-labs/connect/blob/main/CODE_OF_CONDUCT.md) since we expect project participants to adhere to it.
 
 ### Contributing Guide
 
-Read our [contributing guide](https://github.com/hirosystems/connect/blob/main/.github/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
+Read our [contributing guide](https://github.com/stx-labs/connect/blob/main/.github/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.

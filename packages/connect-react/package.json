@@ -1,7 +1,11 @@
 {
   "name": "@stacks/connect-react",
-  "version": "23.1.2",
+  "version": "23.1.4",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stx-labs/connect.git"
+  },
   "scripts": {
     "build": "concurrently 'tsup src/index.ts' 'npm run types'",
     "prepublishOnly": "npm run build",
@@ -9,7 +13,7 @@
     "types": "tsc --project tsconfig.json --emitDeclarationOnly"
   },
   "dependencies": {
-    "@stacks/connect": "8.2.2"
+    "@stacks/connect": "8.2.4"
   },
   "devDependencies": {
     "@types/react-dom": "^18.3.1",

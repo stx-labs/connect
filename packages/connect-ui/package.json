@@ -1,7 +1,11 @@
 {
   "name": "@stacks/connect-ui",
-  "version": "8.1.1",
+  "version": "8.1.2",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stx-labs/connect.git"
+  },
   "scripts": {
     "build": "stencil build --docs",
     "dev": "stencil build --dev --watch",

@@ -51,18 +51,20 @@ export const getRegisteredProviders = () => {
 export const getInstalledProviders = (defaultProviders: WbipProvider[] = []) => {
   if (typeof window === 'undefined') return [];
 
+  // Registered providers are installed by definition (they self-register)
   const registeredProviders = getRegisteredProviders();
 
-  const additionalInstalledProviders = registeredProviders.filter(rp => {
-    // already in default providers, don't add again
-    if (defaultProviders.find(dp => dp.id === rp.id)) return false;
+  // Add default providers that are installed but didn't register themselves
+  const additionalInstalledProviders = defaultProviders.filter(dp => {
+    // Already registered, don't add again
+    if (registeredProviders.find(rp => rp.id === dp.id)) return false;
 
-    // check if default provider is installed (even if not registered)
-    const provider = getProviderFromId(rp.id);
+    // Check if default provider is installed (even if not registered)
+    const provider = getProviderFromId(dp.id);
     return !!provider;
   });
 
-  return defaultProviders.concat(additionalInstalledProviders);
+  return registeredProviders.concat(additionalInstalledProviders);
 };
 
 /**
