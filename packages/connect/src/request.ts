@@ -24,7 +24,7 @@ import { DEFAULT_PROVIDERS, WALLET_CONNECT_PROVIDER } from './providers';
 import { setLocalStorageData } from './storage';
 import { StacksProvider } from './types';
 import { initializeWalletConnectProvider } from './walletconnect';
-import { UniversalConnectorConfig } from '@reown/appkit-universal-connector';
+import type { UniversalConnectorConfig } from '@reown/appkit-universal-connector';
 
 export interface ConnectRequestOptions {
   /**
