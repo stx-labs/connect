@@ -6,7 +6,7 @@ import { replace } from 'esbuild-plugin-replace';
 export default defineConfig({
   format: ['cjs', 'esm', 'iife'],
   outDir: 'dist',
-  external: ['@stacks/connect-ui'],
+  external: ['@stacks/connect-ui', '@reown/appkit-universal-connector', '@reown/appkit'],
 
   clean: true,
   sourcemap: true,

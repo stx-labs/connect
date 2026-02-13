@@ -1,4 +1,7 @@
-import { UniversalConnector, UniversalConnectorConfig } from '@reown/appkit-universal-connector';
+import type {
+  UniversalConnector as UniversalConnectorType,
+  UniversalConnectorConfig,
+} from '@reown/appkit-universal-connector';
 import {
   AddressEntry,
   GetAddressesResult,
@@ -20,8 +23,8 @@ function jsonRpcResponse<M extends keyof MethodsRaw>(result: unknown): JsonRpcRe
 }
 
 class WalletConnectProvider implements StacksProvider {
-  private connector: UniversalConnector;
-  constructor(connector: UniversalConnector) {
+  private connector: UniversalConnectorType;
+  constructor(connector: UniversalConnectorType) {
     this.connector = connector;
   }
 
@@ -203,6 +206,7 @@ export async function initializeWalletConnectProvider(
       ? { projectId: arg, config: undefined }
       : { projectId: arg.projectId, config: arg };
 
+  const { UniversalConnector } = await import('@reown/appkit-universal-connector');
   const provider = await UniversalConnector.init({
     ...Default,
     ...config,
