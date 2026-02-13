@@ -1,5 +1,7 @@
-import { CustomCaipNetwork, UniversalConnectorConfig } from '@reown/appkit-universal-connector';
-import { bitcoin, bitcoinTestnet } from '@reown/appkit/networks';
+import type {
+  CustomCaipNetwork,
+  UniversalConnectorConfig,
+} from '@reown/appkit-universal-connector';
 import { MethodsRaw } from '../methods';
 
 const stacksMethods: (keyof MethodsRaw)[] = [
@@ -41,8 +43,24 @@ export namespace Chains {
   }
 
   export namespace Bitcoin {
-    export const Mainnet = bitcoin;
-    export const Testnet = bitcoinTestnet;
+    export const Mainnet: CustomCaipNetwork<'bip122'> = {
+      id: '000000000019d6689c085ae165831e93',
+      caipNetworkId: 'bip122:000000000019d6689c085ae165831e93',
+      chainNamespace: 'bip122' as const,
+      name: 'Bitcoin',
+      nativeCurrency: { name: 'Bitcoin', symbol: 'BTC', decimals: 8 },
+      rpcUrls: { default: { http: ['https://rpc.walletconnect.org/v1'] } },
+    };
+
+    export const Testnet: CustomCaipNetwork<'bip122'> = {
+      id: '000000000933ea01ad0ee984209779ba',
+      caipNetworkId: 'bip122:000000000933ea01ad0ee984209779ba',
+      chainNamespace: 'bip122' as const,
+      name: 'Bitcoin Testnet',
+      nativeCurrency: { name: 'Bitcoin', symbol: 'BTC', decimals: 8 },
+      rpcUrls: { default: { http: ['https://rpc.walletconnect.org/v1'] } },
+      testnet: true,
+    };
   }
 }
 
