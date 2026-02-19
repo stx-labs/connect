@@ -1,6 +1,6 @@
 {
   "name": "@stacks/connect-react",
-  "version": "23.1.4",
+  "version": "23.1.5",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
     "types": "tsc --project tsconfig.json --emitDeclarationOnly"
   },
   "dependencies": {
-    "@stacks/connect": "8.2.4"
+    "@stacks/connect": "8.2.5"
   },
   "devDependencies": {
     "@types/react-dom": "^18.3.1",
