@@ -1,5 +1,12 @@
 # Change Log
 
+## 8.2.5
+
+### Patch Changes
+
+- 8074b1c: Expose `WalletConnect.initializeProvider()` function to allow initializing WalletConnect independently from the `request` flow
+- 8f729d1: Lazy-load @reown/appkit to reduce initial bundle size and eliminate Lit SSR warnings
+
 ## 8.2.4
 
 ### Patch Changes
