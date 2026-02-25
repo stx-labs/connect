@@ -29,13 +29,36 @@ class WalletConnectProvider implements StacksProvider {
   }
 
   private async connect() {
-    try {
-      const { session } = await this.connector.connect();
-      return session;
-    } catch (error) {
-      console.error('>> WalletConnectProvider connect error', error);
-      throw error;
-    }
+    // Access the AppKit instance to detect modal dismissal.
+    // The field is private in TS but present at runtime.
+    const appKit = (this.connector as any).appKit as
+      | { subscribeState(cb: (state: { open: boolean }) => void): () => void }
+      | undefined;
+
+    return new Promise<Awaited<ReturnType<UniversalConnectorType['connect']>>['session']>(
+      (resolve, reject) => {
+        // When the user closes the WalletConnect modal without pairing,
+        // connector.connect() hangs forever. Detect that and reject.
+        const unsubscribe = appKit?.subscribeState((state: { open: boolean }) => {
+          if (!state.open && !this.connector.provider?.session) {
+            unsubscribe?.();
+            reject(new Error('User closed the WalletConnect modal'));
+          }
+        });
+
+        this.connector
+          .connect()
+          .then(({ session }) => {
+            unsubscribe?.();
+            resolve(session);
+          })
+          .catch(error => {
+            unsubscribe?.();
+            console.error('>> WalletConnectProvider connect error', error);
+            reject(error);
+          });
+      }
+    );
   }
 
   private get stacksAddresses(): (AddressEntry & { path?: string; purpose?: string })[] {
