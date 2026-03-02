@@ -1,5 +1,11 @@
 # Change Log
 
+## 8.2.6
+
+### Patch Changes
+
+- 0ac25a8: Fix WalletConnect modal dismissal leaving the request promise hanging indefinitely. When the user closes the WalletConnect pairing modal without completing the connection, the promise now correctly rejects with an error instead of hanging forever.
+
 ## 8.2.5
 
 ### Patch Changes
