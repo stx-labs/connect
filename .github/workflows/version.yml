@@ -7,8 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -21,19 +20,3 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/install-node
       - uses: ./.github/actions/check-code
-
-  # TODO: RE-ENABLE VERSION WHEN PERMISSIONS ARE FIXED
-  # version:
-  #   runs-on: ubuntu-latest
-  #   if: "!contains(github.event.head_commit.message, 'chore: version packages')"
-  #   needs: [code-checks]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: ./.github/actions/install-node
-  #     - uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba
-  #       with:
-  #         title: "chore: version packages"
-  #         commit: "chore: version packages"
-  #         commitMode: "github-api"
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

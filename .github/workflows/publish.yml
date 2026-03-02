@@ -14,10 +14,18 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  publish-npm:
+  publish:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'chore: version packages')"
+    if: contains(github.event.head_commit.message, 'chore: version packages')
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/install-node
       - run: npx lerna publish from-package --yes
+
+      - name: Create GitHub Release
+        run: |
+          version=$(node -p "require('./packages/connect/package.json').version")
+          notes=$(awk '/^## /{if(n++)exit}n' packages/connect/CHANGELOG.md)
+          gh release create "v${version}" --notes "$notes" --target "$GITHUB_SHA"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

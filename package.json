@@ -16,6 +16,7 @@
     "lint:eslint:fix": "eslint \"packages/**/src/**/*.{ts,tsx}\" --fix",
     "lint:prettier": "prettier --check \"packages/**/src/**/*.{ts,tsx}\" *.js",
     "lint:prettier:fix": "prettier --write \"packages/**/src/**/*.{ts,tsx}\" *.js",
+    "version": "changeset version && npm install",
     "typecheck": "lerna run typecheck --parallel --no-bail --stream",
     "types": "lerna run types",
     "types:connect": "lerna run types --scope @stacks/connect",
