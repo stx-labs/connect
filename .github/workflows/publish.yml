@@ -25,7 +25,7 @@ jobs:
       - name: Create GitHub Release
         run: |
           version=$(node -p "require('./packages/connect/package.json').version")
-          notes=$(awk '/^## /{if(n++)exit}n' packages/connect/CHANGELOG.md)
+          notes=$(awk '/^## /{if(n++)exit;next}n' packages/connect/CHANGELOG.md)
           gh release create "v${version}" --notes "$notes" --target "$GITHUB_SHA"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
