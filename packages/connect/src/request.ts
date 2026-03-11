@@ -88,9 +88,20 @@ export interface ConnectRequestOptions {
    * `"WalletConnectProvider"` in the `approvedProviderIds` array.
    */
   walletConnect?: Partial<Pick<UniversalConnectorConfig, 'metadata' | 'networks'>> &
-    Omit<UniversalConnectorConfig, 'metadata' | 'networks'>;
+  Omit<UniversalConnectorConfig, 'metadata' | 'networks'>;
 }
 
+/**
+ * Sends a raw JSON-RPC request to the given wallet provider.
+ * Unlike {@link request}, this function does not handle wallet selection,
+ * UI modals, parameter serialization, or local storage caching.
+ *
+ * @param provider - The wallet provider instance to send the request to
+ * @param method - The JSON-RPC method name (e.g., `'getAddresses'`, `'stx_transferStx'`)
+ * @param params - Optional parameters for the method
+ * @returns The raw result from the wallet provider
+ * @throws {JsonRpcError} If the provider returns an error or fails to respond
+ */
 export async function requestRaw<M extends keyof MethodsRaw>(
   provider: StacksProvider,
   method: M,
@@ -554,9 +565,9 @@ export function serializeParams<M extends keyof Methods>(params: MethodParams<M>
     if (typeof value === 'object' && 'type' in value) {
       result[key] = POST_CONDITIONS.includes(value.type)
         ? // Post condition
-          postConditionToHex(value)
+        postConditionToHex(value)
         : // Clarity value
-          Cl.serialize(value);
+        Cl.serialize(value);
     }
   }
 

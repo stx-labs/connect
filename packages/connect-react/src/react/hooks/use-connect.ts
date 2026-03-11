@@ -38,6 +38,21 @@ const useConnectDispatch = () => {
   return dispatch;
 };
 
+/**
+ * React hook that provides wallet connection and transaction capabilities
+ * for Stacks applications. Must be used within a `ConnectProvider`.
+ *
+ * @returns An object with authentication state and action functions for
+ * wallet connection, contract calls, STX transfers, signing, and more.
+ *
+ * @example
+ * ```tsx
+ * function MyComponent() {
+ *   const { doAuth, doContractCall, doSTXTransfer } = useConnect();
+ *   return <button onClick={() => doAuth()}>Connect Wallet</button>;
+ * }
+ * ```
+ */
 export const useConnect = () => {
   // todo: add custom provider injection in connect context
   const { isOpen, isAuthenticating, authData, authOptions, userSession } =
@@ -93,6 +108,12 @@ export const useConnect = () => {
     );
   };
 
+  /**
+   * Opens a contract call transaction popup.
+   *
+   * @param options - Contract call options including contract address, name, function, and args
+   * @param provider - Optional specific wallet provider to use
+   */
   function doContractCall(
     options: ContractCallOptions | ContractCallRegularOptions | ContractCallSponsoredOptions,
     provider?: StacksProvider
@@ -107,6 +128,12 @@ export const useConnect = () => {
     );
   }
 
+  /**
+   * Opens a contract deploy transaction popup.
+   *
+   * @param options - Contract deploy options including contract name and code body
+   * @param provider - Optional specific wallet provider to use
+   */
   function doContractDeploy(
     options: ContractDeployOptions | ContractDeployRegularOptions | ContractDeploySponsoredOptions,
     provider?: StacksProvider
@@ -121,6 +148,12 @@ export const useConnect = () => {
     );
   }
 
+  /**
+   * Opens a STX transfer transaction popup.
+   *
+   * @param options - Transfer options including recipient address, amount, and optional memo
+   * @param provider - Optional specific wallet provider to use
+   */
   function doSTXTransfer(
     options: STXTransferOptions | STXTransferRegularOptions | STXTransferSponsoredOptions,
     provider?: StacksProvider
@@ -135,6 +168,12 @@ export const useConnect = () => {
     );
   }
 
+  /**
+   * Opens a profile update request popup.
+   *
+   * @param options - Profile update options
+   * @param provider - Optional specific wallet provider to use
+   */
   function doProfileUpdate(options: ProfileUpdateRequestOptions, provider?: StacksProvider) {
     return openProfileUpdateRequestPopup(
       {
@@ -146,6 +185,12 @@ export const useConnect = () => {
     );
   }
 
+  /**
+   * Opens a sign transaction popup for signing a pre-built transaction hex.
+   *
+   * @param options - Sign transaction options including the transaction hex string
+   * @param provider - Optional specific wallet provider to use
+   */
   function doSignTransaction(options: SignTransactionOptions, provider?: StacksProvider) {
     return openSignTransaction(
       {
@@ -157,6 +202,12 @@ export const useConnect = () => {
     );
   }
 
+  /**
+   * Opens a message signing popup for signing an arbitrary string message.
+   *
+   * @param options - Signature request options including the message to sign
+   * @param provider - Optional specific wallet provider to use
+   */
   function sign(options: SignatureRequestOptions, provider?: StacksProvider) {
     return openSignatureRequestPopup(
       {
@@ -182,6 +233,12 @@ export const useConnect = () => {
     );
   }
 
+  /**
+   * Opens a PSBT (Partially Signed Bitcoin Transaction) signing popup.
+   *
+   * @param options - PSBT request options including the base64-encoded PSBT
+   * @param provider - Optional specific wallet provider to use
+   */
   function signPsbt(options: PsbtRequestOptions, provider?: StacksProvider) {
     return openPsbtRequestPopup(
       {
