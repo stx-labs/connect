@@ -17,6 +17,6 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'chore: version packages')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: ./.github/actions/install-node
       - uses: ./.github/actions/check-code
