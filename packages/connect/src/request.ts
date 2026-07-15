@@ -422,7 +422,7 @@ function wrapResultOverrides<
   };
 }
 
-function getMethodOverrides<M extends keyof Methods>(
+export function getMethodOverrides<M extends keyof Methods>(
   provider: StacksProvider,
   method: M,
   params?: MethodParams<M>,

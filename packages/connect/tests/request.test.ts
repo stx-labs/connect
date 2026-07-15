@@ -1,6 +1,6 @@
 import { Cl, PostCondition } from '@stacks/transactions';
 import { describe, expect, it } from 'vitest';
-import { serializeParams } from '../src/request';
+import { getMethodOverrides, serializeParams } from '../src/request';
 
 describe('serializeParams', () => {
   it('should handle basic params', () => {
@@ -85,5 +85,51 @@ describe('serializeParams', () => {
       network: { client: {} },
       num: 123,
     });
+  });
+});
+
+describe('getMethodOverrides', () => {
+  const leatherProvider = { isLeather: true } as any;
+  const PSBT_BASE64 = 'cHNidP8='; // "psbt\xff"
+  const PSBT_HEX = '70736274ff';
+
+  it('maps Leather signPsbt params with signInputs', () => {
+    const { method, params } = getMethodOverrides(leatherProvider, 'signPsbt', {
+      psbt: PSBT_BASE64,
+      signInputs: [0, { index: 2, address: 'bc1qexample' }],
+      broadcast: false,
+      network: 'mainnet',
+    });
+    expect(method).toBe('signPsbt');
+    expect(params).toMatchObject({
+      hex: PSBT_HEX,
+      signAtIndex: [0, 2],
+      broadcast: false,
+      network: 'mainnet',
+    });
+  });
+
+  it('omits signAtIndex when signInputs is undefined', () => {
+    const { params } = getMethodOverrides(leatherProvider, 'signPsbt', {
+      psbt: PSBT_BASE64,
+    });
+    expect(params.hex).toBe(PSBT_HEX);
+    expect('signAtIndex' in params).toBe(false);
+  });
+
+  it('forwards descriptor to Leather', () => {
+    const descriptor = 'wsh(and_v(v:pk(A),older(144)))';
+    const { params } = getMethodOverrides(leatherProvider, 'signPsbt', {
+      psbt: PSBT_BASE64,
+      descriptor,
+    });
+    expect(params.descriptor).toBe(descriptor);
+  });
+
+  it('leaves signPsbt untouched for non-Leather providers', () => {
+    const original = { psbt: PSBT_BASE64, signInputs: [0] };
+    const { method, params } = getMethodOverrides({} as any, 'signPsbt', original);
+    expect(method).toBe('signPsbt');
+    expect(params).toBe(original);
   });
 });
