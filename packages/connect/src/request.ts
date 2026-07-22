@@ -422,7 +422,7 @@ function wrapResultOverrides<
   };
 }
 
-function getMethodOverrides<M extends keyof Methods>(
+export function getMethodOverrides<M extends keyof Methods>(
   provider: StacksProvider,
   method: M,
   params?: MethodParams<M>,
@@ -498,15 +498,16 @@ function getMethodOverrides<M extends keyof Methods>(
 
   // Leather `signPsbt`
   if (isLeather(provider) && method === 'signPsbt') {
+    const signInputs = (params as MethodParams<'signPsbt'>).signInputs;
     const paramsLeather = {
       hex: bytesToHex(base64.decode((params as MethodParams<'signPsbt'>).psbt)),
-      signAtIndex: (params as MethodParams<'signPsbt'>).signInputs.map(i => {
-        if (typeof i === 'number') return i;
-        return i.index;
-      }),
+      ...(signInputs
+        ? { signAtIndex: signInputs.map(i => (typeof i === 'number' ? i : i.index)) }
+        : {}),
       allowedSighash: (params as MethodParams<'signPsbt'>).allowedSighash,
       broadcast: (params as MethodParams<'signPsbt'>).broadcast,
       network: (params as MethodParams<'signPsbt'>).network,
+      descriptor: (params as MethodParams<'signPsbt'>).descriptor,
     };
     return { method, params: paramsLeather };
   }

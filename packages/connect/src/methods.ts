@@ -199,6 +199,12 @@ export interface SignPsbtParams {
 
   /** @experimental Might need a rename, when wallets adopt SIPs/WBIPs. */
   allowedSighash?: Sighash[];
+
+  /**
+   * A `wsh(...)` output descriptor, for signing a P2WSH miniscript policy input.
+   * @experimental Leather-specific; not yet part of a SIP/WBIP.
+   */
+  descriptor?: string;
 }
 
 export interface SignPsbtResult {
