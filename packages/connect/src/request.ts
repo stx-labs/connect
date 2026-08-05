@@ -307,8 +307,13 @@ function filterProviders(approvedProviderIds: string[], providers: WbipProvider[
  * Alias for `request` to `getAddresses` with `forceWalletSelect: true`.
  */
 export function connect(options?: ConnectRequestOptions & MethodParams<'getAddresses'>) {
-  const params = options && 'network' in options ? { network: options.network } : undefined;
-  return request({ ...options, forceWalletSelect: true }, 'getAddresses', params);
+  const { network, allowPolicyAccounts } = options ?? {};
+  const params = shallowDefined({ network, allowPolicyAccounts });
+  return request(
+    { ...options, forceWalletSelect: true },
+    'getAddresses',
+    Object.keys(params).length > 0 ? params : undefined
+  );
 }
 
 /**

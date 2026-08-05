@@ -115,6 +115,14 @@ export interface SignStructuredMessageParams {
 
 export interface GetAddressesParams {
   network?: NetworkString;
+
+  /**
+   * Opts in to policy (multisig) accounts being offered in the wallet's account picker.
+   * When the user connects with one, the wallet returns that account's address in place of
+   * the single-signature address it would otherwise return.
+   * @experimental Leather-specific; not yet part of a SIP/WBIP.
+   */
+  allowPolicyAccounts?: boolean;
   // When updating this interface, make sure to update the `connect` function
   // in `request.ts`, to pass all available params to the wrapped method.
 }
