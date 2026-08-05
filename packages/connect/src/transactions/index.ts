@@ -270,10 +270,12 @@ function optPostConditionMode(mode?: PostConditionModeName | PostConditionMode) 
       return 'allow';
     case PostConditionMode.Deny:
       return 'deny';
+    case PostConditionMode.Originator:
+      return 'originator';
     default:
       const _exhaustiveCheck: never = mode;
       throw new Error(
-        `Unknown post condition mode: ${_exhaustiveCheck}. Should be one of: 'allow', 'deny'`
+        `Unknown post condition mode: ${_exhaustiveCheck}. Should be one of: 'allow', 'deny', 'originator'`
       );
   }
 }
