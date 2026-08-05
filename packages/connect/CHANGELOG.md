@@ -1,5 +1,11 @@
 # Change Log
 
+## 8.2.7
+
+### Patch Changes
+
+- 3e290b0: Handle optional `signInputs` and forward the new experimental `descriptor` param in the Leather `signPsbt` override
+
 ## 8.2.6
 
 ### Patch Changes
