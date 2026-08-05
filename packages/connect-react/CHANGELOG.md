@@ -1,5 +1,13 @@
 # Change Log
 
+## 23.1.7
+
+### Patch Changes
+
+- Updated dependencies [3e290b0]
+- Updated dependencies [89f0b9a]
+  - @stacks/connect@8.2.7
+
 ## 23.1.6
 
 ### Patch Changes
