@@ -1,5 +1,5 @@
 name: "check-code"
-description: "run linting and type checking"
+description: "run linting, type checking, and tests"
 
 runs:
   using: "composite"
@@ -11,4 +11,6 @@ runs:
     - run: npm run typecheck
       shell: bash
     - run: npm run typecheck:test
+      shell: bash
+    - run: npm run test
       shell: bash
