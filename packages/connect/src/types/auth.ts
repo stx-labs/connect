@@ -47,8 +47,6 @@ declare global {
   interface Window {
     __CONNECT_VERSION__?: string;
   }
-
-  const __VERSION__: string;
 }
 
 /** @deprecated */

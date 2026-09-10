@@ -2,11 +2,14 @@ import { NoSessionDataError } from '@stacks/common';
 import { request } from './request';
 import { AuthOptions, StacksProvider } from './types';
 
+/** This package's version, substituted at build time by `define` in `tsup.config.ts`. */
+declare const __VERSION__: string;
+
 /** @deprecated Not used anymore. */
 export const defaultAuthURL = 'https://app.blockstack.org';
 
 if (typeof window !== 'undefined') {
-  window.__CONNECT_VERSION__ = '__VERSION__'; // replaced via tsup esbuildOptions
+  window.__CONNECT_VERSION__ = __VERSION__;
 }
 
 /** @deprecated Will be marked as internal going forward. */
