@@ -93,10 +93,29 @@ describe('getMethodOverrides', () => {
   const PSBT_BASE64 = 'cHNidP8='; // "psbt\xff"
   const PSBT_HEX = '70736274ff';
 
-  it('maps Leather signPsbt params with signInputs', () => {
+  it('maps Leather signPsbt params with index signInputs', () => {
     const { method, params } = getMethodOverrides(leatherProvider, 'signPsbt', {
       psbt: PSBT_BASE64,
-      signInputs: [0, { index: 2, address: 'bc1qexample' }],
+      signInputs: [0, 2],
+      broadcast: false,
+      network: 'mainnet',
+    });
+    expect(method).toBe('signPsbt');
+    expect(params).toMatchObject({
+      hex: PSBT_HEX,
+      signAtIndex: [0, 2],
+      broadcast: false,
+      network: 'mainnet',
+    });
+  });
+
+  it('maps Leather signPsbt params with address signInputs', () => {
+    const { method, params } = getMethodOverrides(leatherProvider, 'signPsbt', {
+      psbt: PSBT_BASE64,
+      signInputs: [
+        { index: 0, address: 'bc1qexample' },
+        { index: 2, address: 'bc1qexample' },
+      ],
       broadcast: false,
       network: 'mainnet',
     });
