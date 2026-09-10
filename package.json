@@ -18,6 +18,7 @@
     "lint:prettier:fix": "prettier --write \"packages/**/src/**/*.{ts,tsx}\" *.js",
     "version": "changeset version && npm install",
     "typecheck": "lerna run typecheck --parallel --no-bail --stream",
+    "typecheck:test": "lerna run typecheck:test --parallel --no-bail --stream",
     "types": "lerna run types",
     "types:connect": "lerna run types --scope @stacks/connect",
     "types:connect-react": "lerna run types --scope @stacks/connect-react"

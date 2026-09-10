@@ -10,3 +10,5 @@ runs:
       shell: bash
     - run: npm run typecheck
       shell: bash
+    - run: npm run typecheck:test
+      shell: bash
