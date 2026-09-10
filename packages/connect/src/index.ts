@@ -104,12 +104,6 @@ export { getStacksProvider, isStacksWalletInstalled } from './utils';
  */
 export * as WalletConnect from './walletconnect';
 
-// TODO: (next)
-// We won't expose these types (TypeBox and Zod) until they are final and stable.
-// TypeBox
-// Only export the outermost typebox schemas
-// export { ClarityValueTypeBoxSchema, PostConditionTypeBoxSchema } from './types/typebox';
-
 // Re-exports
 export {
   clearSelectedProviderId,
