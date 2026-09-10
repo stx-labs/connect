@@ -17,6 +17,7 @@
     "lint:prettier": "prettier --check \"packages/**/src/**/*.{ts,tsx}\" *.js",
     "lint:prettier:fix": "prettier --write \"packages/**/src/**/*.{ts,tsx}\" *.js",
     "version": "changeset version && npm install",
+    "test": "lerna run test --stream",
     "typecheck": "lerna run typecheck --parallel --no-bail --stream",
     "typecheck:test": "lerna run typecheck:test --parallel --no-bail --stream",
     "types": "lerna run types",
