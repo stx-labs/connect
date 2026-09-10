@@ -1,7 +1,6 @@
 import { defineConfig } from 'tsup';
 
 import { version } from './package.json';
-import { replace } from 'esbuild-plugin-replace';
 
 export default defineConfig({
   format: ['cjs', 'esm', 'iife'],
@@ -20,11 +19,9 @@ export default defineConfig({
 
   metafile: !!process.env.ANALYZE,
 
-  esbuildOptions(options) {
-    options.plugins?.push(
-      replace({
-        __VERSION__: version,
-      })
-    );
+  // Note: pushing a replace plugin in `esbuildOptions()` does not work — esbuild
+  // collects plugins before that hook runs.
+  define: {
+    __VERSION__: JSON.stringify(version),
   },
 });
