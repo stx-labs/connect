@@ -14,12 +14,42 @@ import {
 } from '@stacks/transactions-v6';
 import { ConnectNetwork } from './types';
 
-/** @deprecated This will default to the legacy provider. The behavior may be undefined with competing wallets. */
+/**
+ * Gets the current Stacks wallet provider instance.
+ * 
+ * @deprecated This will default to the legacy provider. The behavior may be undefined with competing wallets.
+ * Consider using the `request` method instead for better wallet compatibility.
+ * 
+ * @returns The current Stacks provider instance, or undefined if no provider is available.
+ * @see {@link isStacksWalletInstalled} to check if a wallet is installed
+ * 
+ * @example
+ * ```ts
+ * const provider = getStacksProvider();
+ * if (provider) {
+ *   // Provider is available
+ * }
+ * ```
+ */
 export function getStacksProvider() {
   const provider = getProviderFromId(getSelectedProviderId());
   return provider || (window as any).StacksProvider || (window as any).BlockstackProvider;
 }
 
+/**
+ * Checks if a Stacks-compatible wallet extension is installed and available.
+ * 
+ * @returns `true` if a Stacks wallet provider is detected, `false` otherwise.
+ * 
+ * @example
+ * ```ts
+ * if (isStacksWalletInstalled()) {
+ *   console.log('Wallet is available!');
+ * } else {
+ *   console.log('Please install a Stacks wallet');
+ * }
+ * ```
+ */
 export function isStacksWalletInstalled() {
   return !!getStacksProvider();
 }
@@ -37,11 +67,23 @@ export function legacyNetworkFromConnectNetwork(network?: ConnectNetwork): Legac
     : new LegacyStacksTestnet({ url: network.client.baseUrl });
 }
 
-function isInstance<T>(object: any, clazz: { new (...args: any[]): T }): object is T {
+function isInstance<T>(object: any, clazz: { new(...args: any[]): T }): object is T {
   return object instanceof clazz || object?.constructor?.name?.toLowerCase() === clazz.name;
 }
 
-/** @internal */
+/**
+ * Converts a ConnectNetwork to its string representation.
+ * 
+ * @internal
+ * @param network - The network configuration to convert. Can be a string, legacy network object, or new network format.
+ * @returns A string identifying the network: 'mainnet', 'testnet', 'devnet', or a custom URL.
+ * 
+ * @example
+ * ```ts
+ * connectNetworkToString('testnet'); // Returns 'testnet'
+ * connectNetworkToString(undefined); // Returns 'mainnet'
+ * ```
+ */
 export function connectNetworkToString(network: ConnectNetwork): string {
   // not perfect, but good enough to identify the legacy network in most cases
   if (!network) return 'mainnet';
@@ -62,8 +104,16 @@ export function connectNetworkToString(network: ConnectNetwork): string {
 }
 
 /**
- * @internal
- * This may be moved to Stacks.js in the future.
+ * Converts a legacy Clarity value format to the modern format.
+ * 
+ * @internal - This may be moved to Stacks.js in the future.
+ * @param cv - The Clarity value to convert. Can be either legacy or modern format.
+ * @returns The converted Clarity value in modern format.
+ * @throws {Error} If an unknown Clarity type is encountered.
+ * 
+ * @remarks
+ * This function handles conversion from the v6 transaction format to the current format.
+ * If the value is already in modern format (string type), it's returned as-is.
  */
 export function legacyCVToCV(cv: LegacyClarityValue | ClarityValue): ClarityValue {
   if (typeof cv.type === 'string') return cv;
@@ -107,7 +157,17 @@ export function legacyCVToCV(cv: LegacyClarityValue | ClarityValue): ClarityValu
   }
 }
 
-/** @internal */
+/**
+ * Removes callback functions that cannot be serialized from an options object.
+ * 
+ * @internal
+ * @param obj - The object to sanitize, typically wallet request options.
+ * @returns A new object with `onFinish` and `onCancel` callbacks removed.
+ * 
+ * @remarks
+ * This is used when preparing request parameters to be sent to wallet providers,
+ * as callback functions cannot be serialized for cross-context communication.
+ */
 export function removeUnserializableKeys<O>(
   obj: O | { onFinish?: Function; onCancel?: Function }
 ): O {
