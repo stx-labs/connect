@@ -350,6 +350,97 @@ try {
 }
 ```
 
+### Common Error Codes
+
+When using `isJsonRpcError` to check errors, you can reference these common error codes:
+
+| Code | Name | Description |
+|------|------|-------------|
+| `-32700` | `ParseError` | Invalid JSON received by server |
+| `-32600` | `InvalidRequest` | Invalid Request object |
+| `-32601` | `MethodNotFound` | Method not found/available |
+| `-32602` | `InvalidParams` | Invalid method parameters |
+| `-32603` | `InternalError` | Internal JSON-RPC error |
+| `-32000` | `UserRejection` | User rejected the request |
+| `-32001` | `MethodAddressMismatch` | Address mismatch for requested method |
+| `-32002` | `MethodAccessDenied` | Access denied for requested method |
+| `-32003` | `NetworkError` | Network-related error (e.g., node unavailable) |
+| `-32004` | `TimeoutError` | Request timed out |
+| `-32005` | `ProviderNotFound` | Wallet provider not found |
+| `-31000` | `UnknownError` | Unknown external error |
+| `-31001` | `UserCanceled` | User canceled the request |
+
+## Troubleshooting
+
+### Common Issues
+
+#### "No wallet found" or provider not detected
+
+**Symptoms**: `isStacksWalletInstalled()` returns `false`, or connection fails.
+
+**Solutions**:
+1. Ensure a Stacks-compatible wallet (Leather, Xverse, etc.) is installed
+2. Refresh the page after installing the wallet extension
+3. Check if the wallet is enabled for your domain
+4. Try using `forceWalletSelect: true` to prompt wallet selection:
+   ```ts
+   await connect({ forceWalletSelect: true });
+   ```
+
+#### User rejected request (Error code -32000)
+
+**Symptoms**: `JsonRpcError` with code `-32000`.
+
+**Solutions**:
+1. This is expected behavior when the user clicks "Reject" or closes the wallet popup
+2. Handle this gracefully in your UI:
+   ```ts
+   try {
+     await request('stx_transferStx', params);
+   } catch (error) {
+     if (isJsonRpcError(error) && error.code === -32000) {
+       console.log('User rejected - show friendly message');
+     }
+   }
+   ```
+
+#### Transaction fails with "Invalid params"
+
+**Symptoms**: `JsonRpcError` with code `-32602`.
+
+**Solutions**:
+1. Verify all required parameters are provided
+2. Check that amounts are strings (not numbers) for STX transfers
+3. Ensure addresses are valid Stacks addresses (starting with `SP` or `ST`)
+4. For contract calls, verify function arguments match the contract's expected types
+
+#### Connection works in development but fails in production
+
+**Symptoms**: Wallet connects locally but not on deployed site.
+
+**Solutions**:
+1. Ensure your site uses HTTPS (required by most wallets)
+2. Check if the wallet has granted permission for your production domain
+3. Verify there are no Content Security Policy (CSP) issues blocking the wallet
+
+### Debugging Tips
+
+1. **Enable console logging** to see wallet communication:
+   ```ts
+   // Check what provider is being used
+   console.log('Provider:', getStacksProvider());
+   ```
+
+2. **Verify connection state**:
+   ```ts
+   console.log('Connected:', isConnected());
+   console.log('Storage:', getLocalStorage());
+   ```
+
+3. **Use `requestRaw` for debugging** to bypass compatibility layers and see raw wallet responses.
+
+4. **Check wallet-specific documentation** - Leather and Xverse have different method support (see Support table below).
+
 ## Compatibility
 
 The `request` method by default adds a layer of auto-compatibility for different wallet providers.
