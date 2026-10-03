@@ -36,6 +36,9 @@ export {
   openSignTransaction,
 } from './transactions';
 export { connect, request, requestRaw } from './request';
+export { listen } from './listen';
+export type { ConnectListenOptions } from './listen';
+export type { GetNetworksResult } from './methods';
 export type {
   Methods,
   MethodParams,

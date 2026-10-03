@@ -37,6 +37,12 @@ export interface AddressEntry {
   publicKey: string;
 }
 
+/** SIP-030: configuration IDs are not necessarily API URLs. */
+export interface GetNetworksResult {
+  active: string;
+  networks: { id: string; chainId: number; transactionVersion: number }[];
+}
+
 export interface AccountEntry extends AddressEntry {
   gaiaHubUrl: string;
   gaiaAppKey: string;
@@ -286,6 +292,10 @@ export type Methods = {
   stx_getAccounts: {
     params: GetAccountsParams;
     result: GetAccountsResult;
+  };
+  stx_getNetworks: {
+    params: undefined;
+    result: GetNetworksResult;
   };
   stx_updateProfile: {
     params: UpdateProfileParams;
