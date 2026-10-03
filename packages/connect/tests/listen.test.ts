@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { listen } from '../src/listen';
 import { requestRaw } from '../src/request';
-import type { StacksProvider } from '../src/types';
+import type { ListenEventMap, StacksProvider } from '../src/types';
 
 const result = {
   active: 'custom',
@@ -20,7 +20,7 @@ describe('SIP-030 network APIs', () => {
       listen(event, listener) {
         expect(this).toBe(provider);
         expect(event).toBe('stx_networkChange');
-        listener(result);
+        listener(result as ListenEventMap[typeof event]);
         return cleanup;
       },
     };
@@ -85,6 +85,39 @@ describe('SIP-030 network APIs', () => {
     await Promise.resolve();
     await Promise.resolve();
     expect(callback).not.toHaveBeenCalled();
+  });
+  it('passes native account arrays and preserves the provider receiver', () => {
+    const accounts = [
+      {
+        address: 'SP123',
+        publicKey: '02abc',
+        gaiaHubUrl: 'https://gaia.invalid',
+        gaiaAppKey: '0'.repeat(64),
+      },
+    ];
+    const cleanup = vi.fn();
+    const callback = vi.fn();
+    const provider: StacksProvider = {
+      request: vi.fn(),
+      listen(event, listener) {
+        expect(this).toBe(provider);
+        expect(event).toBe('stx_accountChange');
+        listener(accounts as ListenEventMap[typeof event]);
+        return cleanup;
+      },
+    };
+    expect(listen({ provider }, 'stx_accountChange', callback)).toBe(cleanup);
+    expect(callback).toHaveBeenCalledWith(accounts);
+    expect(provider.request).not.toHaveBeenCalled();
+  });
+  it('does not adapt legacy accounts or open getAccounts approval popups', () => {
+    const request = vi.fn();
+    const addListener = vi.fn();
+    expect(() =>
+      listen({ provider: { request, addListener } as StacksProvider }, 'stx_accountChange', vi.fn())
+    ).toThrow('account listeners');
+    expect(addListener).not.toHaveBeenCalled();
+    expect(request).not.toHaveBeenCalled();
   });
   it('fails explicitly for request-only providers', () => {
     expect(() => listen({ provider: { request: vi.fn() } }, 'stx_networkChange', vi.fn())).toThrow(
